@@ -1,0 +1,16 @@
+{
+  "name": "cgal_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "http-server .",
+    "build": "emcc -O2 -DCGAL_DISABLE_GMP=ON -DCGAL_USE_CORE=OFF -DCGAL_NO_ASSERTIONS=1 -DCGAL_DISABLE_ROUNDING_MATH_CHECK -sASSERTIONS=1 -sNO_DISABLE_EXCEPTION_CATCHING -sNO_EXIT_RUNTIME=1 -sEXPORTED_RUNTIME_METHODS=['ccall','cwrap'] -sALLOW_MEMORY_GROWTH=1 --no-entry -sFORCE_FILESYSTEM=1 -Ivendor/mpfr_4_2_1/src -Ivendor/boost_1_86_0 -Ivendor/CGAL_6_0_1/include main.cpp --bind"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1" 
+  }
+}

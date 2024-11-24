@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>CGAL Test</title>
+</head>
+
+<body>
+  <script>
+    var Module = {
+      onRuntimeInitialized: function () {
+        console.time('Total Operations');
+        
+        // Create skeleton manager for a polygon 
+        console.time('Create SkeletonManager');
+        const skeletonManager = Module.SkeletonManager.create([
+          { x: 0, y: 0 },
+          { x: 100, y: 0 },
+          { x: 100, y: 100 },
+          { x: 0, y: 100 }
+        ]);
+        console.timeEnd('Create SkeletonManager');
+
+        // Get interior offsets
+        console.time('Interior Offset');
+        const interiorOffsets = skeletonManager.offsetPolygon(10, Module.OffsetType.INTERIOR.value);
+        console.timeEnd('Interior Offset');
+
+        // Get exterior offsets
+        console.time('Exterior Offset');
+        const exteriorOffsets = skeletonManager.offsetPolygon(2, Module.OffsetType.EXTERIOR.value);
+        console.timeEnd('Exterior Offset');
+
+        console.log("interiorOffsets", interiorOffsets);
+        console.log("exteriorOffsets", exteriorOffsets);
+
+        // Get skeleton information
+        console.time('Get Interior Skeleton Info');
+        const interiorSkeletonInfo = skeletonManager.getSkeletonInfo(Module.OffsetType.INTERIOR.value);
+        console.timeEnd('Get Interior Skeleton Info');
+
+        console.time('Get Exterior Skeleton Info');
+        const exteriorSkeletonInfo = skeletonManager.getSkeletonInfo(Module.OffsetType.EXTERIOR.value);
+        console.timeEnd('Get Exterior Skeleton Info');
+
+        console.log("interiorSkeletonInfo", interiorSkeletonInfo);
+        console.log("exteriorSkeletonInfo", exteriorSkeletonInfo);
+
+        skeletonManager.delete();
+        console.timeEnd('Total Operations');
+      }
+    };
+
+  </script>
+  <script src="a.out.js"></script>
+
+</body>
+
+</html>
